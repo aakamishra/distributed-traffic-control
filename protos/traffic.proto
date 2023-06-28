@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.modules.trafficserver";
+option java_outer_classname = "TrafficServerProto";
+option objc_class_prefix = "CHSR";
+
+package trafficcontrol;
+
+// The greeting service definition.
+service TrafficServer {
+  // Sends a greeting
+
+  rpc SendState (StateRequest) returns (StateReply) {}
+
+  rpc HeartBeat (RefreshRequest) returns (RefreshReply) {}
+
+  rpc TransmitData (DataTransmission) returns (DataReply) {}
+
+}
+
+message StateRequest {
+  int32 version = 1;
+  string message = 2;
+}
+
+message StateReply {
+  int32 version = 1;
+  string error_code = 2;
+}
+
+message RefreshRequest {
+  int32 version = 1;
+  int32 time = 2;
+  int32 phase_id = 3;
+  string intersection_id = 4;
+  string api_key = 5;
+}
+
+message RefreshReply {
+  int32 version = 1;
+  int32 time = 2;
+  string error_code = 3;
+}
+
+message DataTransmission {
+  message KeyValue {
+    string key = 1;
+    int32 value = 2;
+  }
+  int32 version = 1;
+  string intersection_id = 2;
+  string timestamp = 3;
+  repeated KeyValue entries = 4;
+  string api_key = 5;
+}
+
+message DataReply {
+  int32 version = 1;
+  int32 time = 2;
+  string error_code = 3;
+}
+

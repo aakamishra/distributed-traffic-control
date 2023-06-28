@@ -1,0 +1,3 @@
+[submodule "MPLight"]
+	path = MPLight
+	url = https://github.com/Chacha-Chen/MPLight
